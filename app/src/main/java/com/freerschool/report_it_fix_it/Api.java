@@ -6,9 +6,9 @@ package com.freerschool.report_it_fix_it;
 
 public class Api {
     private static final String ROOT_URL = "http://freerschool.com/FixIt/v1/Api.php?apicall=";
-    public static final String URL_CREATE_USER = ROOT_URL + "createuser";
-    public static final String URL_READ_USER = ROOT_URL + "readuser";
-    public static final String URL_UPDATE_USER = ROOT_URL + "updateuser";
-    public static final String URL_DELETE_USER = ROOT_URL + "deleteuser&id=";
+    public static final String URL_CREATE_FIXIT = ROOT_URL + "createfixit";
+    public static final String URL_READ_FIXIT = ROOT_URL + "getfixit";
+    public static final String URL_UPDATE_FIXIT = ROOT_URL + "updatefixit";
+    public static final String URL_DELETE_FIXIT = ROOT_URL + "deletefixit&id=";
     //awesome.
 }
