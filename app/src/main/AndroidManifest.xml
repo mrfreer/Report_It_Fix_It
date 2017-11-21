@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FixStuff"></activity>
+        <activity android:name=".FixStuff" />
+        <activity
+            android:name=".ViewFixIts"
+            android:label="@string/title_activity_view_fix_its"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
