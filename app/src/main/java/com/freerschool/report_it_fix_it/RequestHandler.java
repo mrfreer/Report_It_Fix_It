@@ -63,7 +63,7 @@ public class RequestHandler {
         StringBuilder sb = new StringBuilder();
         try{
             URL url = new URL(requestURL);
-            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String s;
             while((s = bufferedReader.readLine()) != null){
