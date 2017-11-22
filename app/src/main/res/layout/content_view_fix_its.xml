@@ -8,4 +8,78 @@
     tools:context="com.freerschool.report_it_fix_it.ViewFixIts"
     tools:showIn="@layout/activity_view_fix_its">
 
+    <EditText
+        android:id="@+id/editTextUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="159dp"
+        android:ems="10"
+        android:hint="User Id:"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewFixIts" />
+
+    <EditText
+        android:id="@+id/editTextLocationId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Location Id:"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/editTextUserId"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserId" />
+
+    <EditText
+        android:id="@+id/editTextImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Image:"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/editTextLocationId"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLocationId" />
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ems="10"
+        android:hint="Description:"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextImage" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFixed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="39dp"
+        android:text="Fixed?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextUserId" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginTop="14dp"
+        android:text="Update"
+        app:layout_constraintEnd_toEndOf="@+id/checkBoxFixed"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxFixed" />
+
+    <ListView
+        android:id="@+id/listViewFixIts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextUserId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

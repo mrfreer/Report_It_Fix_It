@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void viewFixIts(View view){
+        Intent intent = new Intent(this, ViewFixIts.class);
+        startActivity(intent);
+    }
 }
