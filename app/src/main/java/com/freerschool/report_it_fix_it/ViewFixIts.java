@@ -31,6 +31,7 @@ public class ViewFixIts extends AppCompatActivity {
     private static final int CODE_POST_REQUEST = 1025;
 
     private void readFixIt(){
+
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_READ_FIXIT, null, CODE_GET_REQUEST);
         request.execute();
     }
@@ -74,13 +75,21 @@ public class ViewFixIts extends AppCompatActivity {
         Log.v("herehere", "do we");
         for(int i = 0; i < fixIts.length(); i++) {
             JSONObject obj = fixIts.getJSONObject(i);
+            boolean curFixed;
+            int cf = obj.getInt("Fixed");
+            if(cf == 0){
+                curFixed = false;
+            }
+            else{
+                curFixed = true;
+            }
             thingsToFix.add(new ThingsToFix(
                     obj.getInt("Things_Id"),
                     obj.getInt("UserId"),
                     obj.getInt("LocationId"),
                     obj.getString("Image"),
                     obj.getString("Description"),
-                    obj.getBoolean("Fixed")
+                    curFixed
             ));
         }
             FixItAdapter adapter = new FixItAdapter(thingsToFix);
@@ -108,11 +117,12 @@ public class ViewFixIts extends AppCompatActivity {
 
         protected void onPostExecute(String s){
             super.onPostExecute(s);
+            Log.v("testinghere", s);
             try{
                 JSONObject object = new JSONObject(s);
                 if(!object.getBoolean("error")){
                     Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
-                    refreshFixIts(object.getJSONArray("fixIts"));
+                    refreshFixIts(object.getJSONArray("fixit"));//object.getJSONArray("fixIts"));
                 }
             }
             catch (JSONException e){
@@ -139,7 +149,7 @@ public class ViewFixIts extends AppCompatActivity {
 
         List<ThingsToFix> thingsToFixList;
         public FixItAdapter(List<ThingsToFix> thingsToFixList) {
-            super(ViewFixIts.this, R.layout.things_to_fix_layout);
+            super(ViewFixIts.this, R.layout.things_to_fix_layout, thingsToFixList);
             this.thingsToFixList = thingsToFixList;
         }
 
@@ -168,8 +178,5 @@ public class ViewFixIts extends AppCompatActivity {
 
             return listViewItem;
         }
-
-
-
     }
 }

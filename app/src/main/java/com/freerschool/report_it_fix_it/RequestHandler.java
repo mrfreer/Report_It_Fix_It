@@ -1,5 +1,7 @@
 package com.freerschool.report_it_fix_it;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -60,6 +62,7 @@ public class RequestHandler {
     }
 
     public String sendGetRequest(String requestURL){
+        Log.v("checkURL", requestURL);
         StringBuilder sb = new StringBuilder();
         try{
             URL url = new URL(requestURL);
@@ -68,6 +71,7 @@ public class RequestHandler {
             String s;
             while((s = bufferedReader.readLine()) != null){
                 sb.append(s + "\n");
+                Log.v("checks", s.toString());
             }
         }catch (Exception e){
             e.printStackTrace();
