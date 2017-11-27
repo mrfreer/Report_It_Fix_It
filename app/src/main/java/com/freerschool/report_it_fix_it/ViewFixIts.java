@@ -45,8 +45,7 @@ public class ViewFixIts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_fix_its);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         editTextUserId = findViewById(R.id.editTextUserId);
         editTextLocationId = findViewById(R.id.editTextLocationId);
         editTextImage = findViewById(R.id.editTextImage);
@@ -56,14 +55,6 @@ public class ViewFixIts extends AppCompatActivity {
         button = findViewById(R.id.button);
         listView = findViewById(R.id.listViewFixIts);
         thingsToFix = new ArrayList<>();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         readFixIt();
     }
@@ -167,6 +158,10 @@ public class ViewFixIts extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     isUpdating = true;
+                    editTextUserId.setEnabled(true);
+                    editTextLocationId.setEnabled(true);
+                    editTextImage.setEnabled(true);
+                    editTextDescription.setEnabled(true);
                     editTextUserId.setText(String.valueOf(thingsToFix.getUserId()));
                     editTextLocationId.setText(String.valueOf(thingsToFix.getLocationId()));
                     editTextDescription.setText(thingsToFix.getDescription());

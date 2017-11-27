@@ -6,80 +6,107 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.freerschool.report_it_fix_it.ViewFixIts"
+    tools:layout_editor_absoluteY="25dp"
     tools:showIn="@layout/activity_view_fix_its">
 
-    <EditText
-        android:id="@+id/editTextUserId"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="399dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="159dp"
-        android:ems="10"
-        android:hint="User Id:"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/listViewFixIts"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewFixIts" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editTextLocationId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Location Id:"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextUserId"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserId" />
+        <CheckBox
+            android:id="@+id/checkBoxFixed"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginEnd="16dp"
+            android:text="Fixed?"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout" />
 
-    <EditText
-        android:id="@+id/editTextImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Image:"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextLocationId"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLocationId" />
+        <EditText
+            android:id="@+id/editTextLocationId"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="Location Id:"
+            android:inputType="textPersonName"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:ems="10"
-        android:hint="Description:"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextImage" />
+        <EditText
+            android:id="@+id/editTextImage"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="Image:"
+            android:inputType="textPersonName"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBoxFixed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="39dp"
-        android:text="Fixed?"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextUserId" />
+        <EditText
+            android:id="@+id/editTextDescription"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="Description:"
+            android:inputType="textPersonName"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="9dp"
-        android:layout_marginTop="14dp"
-        android:text="Update"
-        app:layout_constraintEnd_toEndOf="@+id/checkBoxFixed"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxFixed" />
+        <EditText
+            android:id="@+id/editTextUserId"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="User Id:"
+            android:inputType="textPersonName"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"
+            android:text="Update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listViewFixIts"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextUserId"
+        android:layout_width="385dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+    </ListView>
 </android.support.constraint.ConstraintLayout>
