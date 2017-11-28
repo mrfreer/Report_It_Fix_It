@@ -4,68 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.freerschool.report_it_fix_it.FixStuff">
+    tools:context="com.freerschool.report_it_fix_it.FixStuff"
+    tools:layout_editor_absoluteY="25dp">
 
     <EditText
         android:id="@+id/editTextUserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
         android:ems="10"
         android:hint="User Id"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/editTextLocationId"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="152dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextLocationId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
         android:ems="10"
         android:hint="Location Id"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/editTextImage"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserId"
-        tools:layout_editor_absoluteX="152dp" />
-
-    <EditText
-        android:id="@+id/editTextImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDescription"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLocationId"
-        tools:layout_editor_absoluteX="152dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
+        app:layout_constraintStart_toStartOf="@+id/editTextUserId"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserId" />
 
     <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/checkBoxFixed"
-        app:layout_constraintTop_toBottomOf="@+id/editTextImage"
-        tools:layout_editor_absoluteX="152dp" />
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFixIt"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonCamera" />
 
     <CheckBox
         android:id="@+id/checkBoxFixed"
         android:layout_width="209dp"
-        android:layout_height="42dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="40dp"
         android:text="Fixed?"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescription"
-        tools:layout_editor_absoluteX="158dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:layout_marginStart="48dp"
         android:onClick="fixIt"
         android:text="Fix It!"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxFixed"
-        tools:layout_editor_absoluteX="158dp" />
+        app:layout_constraintStart_toStartOf="@+id/checkBoxFixed"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxFixed" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="85dp"
+        android:onClick="addImage"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDescription"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewFixIt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLocationId"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <ImageView
+        android:id="@+id/imageViewFixIt"
+        android:layout_width="0dp"
+        android:layout_height="91dp"
+        android:layout_marginBottom="65dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginTop="65dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonCamera"
+        app:layout_constraintTop_toTopOf="@+id/editTextLocationId"
+        app:srcCompat="@android:color/holo_blue_dark" />
 </android.support.constraint.ConstraintLayout>

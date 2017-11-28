@@ -1,12 +1,18 @@
 package com.freerschool.report_it_fix_it;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -67,14 +73,41 @@ public class FixStuff extends AppCompatActivity {
     }
 
     //Attributes
+    ImageButton camera;
+    ImageView imageViewFixIt;
     EditText UserId, LocationId, Image, Description;
     CheckBox Fixed;
     List<ThingsToFix> thingsToFixList;
+    static final int CAMERA_PIC_REQUEST = 1;
+    int  TAKE_PICTURE=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_stuff);
         thingsToFixList = new ArrayList<>();
+    }
+
+    public void addImage(View view){
+        camera = findViewById(R.id.imageButtonCamera);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(cameraIntent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+        }
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data); //I left this out!
+        if(requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageViewFixIt = findViewById(R.id.imageViewFixIt);
+            imageViewFixIt.setImageBitmap(imageBitmap);
+            camera.setImageBitmap(imageBitmap);
+        }
+        else{
+            Toast.makeText(this, "Picture NOT taken", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void fixIt(View view){
