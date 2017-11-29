@@ -36,14 +36,13 @@
         android:id="@+id/editTextDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="210dp"
+        android:layout_marginEnd="11dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/checkBoxFixed"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewFixIt"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonCamera" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFixIt" />
 
     <CheckBox
         android:id="@+id/checkBoxFixed"
@@ -93,5 +92,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButtonCamera"
         app:layout_constraintTop_toTopOf="@+id/editTextLocationId"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:color/holo_blue_dark" />
+
+    <Button
+        android:id="@+id/buttonSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="18dp"
+        android:text="Select From Gallery"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDescription"
+        app:layout_constraintStart_toStartOf="@+id/editTextDescription" />
 </android.support.constraint.ConstraintLayout>
