@@ -3,6 +3,7 @@ package com.freerschool.report_it_fix_it;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -95,164 +97,13 @@ public class FixStuff extends AppCompatActivity {
     List<ThingsToFix> thingsToFixList;
     static final int CAMERA_PIC_REQUEST = 1;
     int  TAKE_PICTURE=0;
-    String ImageName = "image_name" ;
-    String ImagePath = "image_path" ;
-    String ServerUploadPath = "http://freerschool.com/FixIt/v1/Api.php";
+
     boolean check = true;
     Bitmap bitmap;
     Button selectImageGallery;
-    String GetImageNameEditText;
+    String encodedImage = "";
 
-    ProgressDialog progressDialog ;
-    public void ImageUploadToServerFunction(){
-
-        ByteArrayOutputStream byteArrayOutputStreamObject ;
-
-        byteArrayOutputStreamObject = new ByteArrayOutputStream();
-
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStreamObject);
-
-        byte[] byteArrayVar = byteArrayOutputStreamObject.toByteArray();
-
-        final String ConvertImage = Base64.encodeToString(byteArrayVar, Base64.DEFAULT);
-
-        class AsyncTaskUploadClass extends AsyncTask<Void,Void,String> {
-
-            @Override
-            protected void onPreExecute() {
-
-                super.onPreExecute();
-
-                progressDialog = ProgressDialog.show(FixStuff.this,"Image is Uploading","Please Wait",false,false);
-            }
-
-            @Override
-            protected void onPostExecute(String string1) {
-
-                super.onPostExecute(string1);
-
-                // Dismiss the progress dialog after done uploading.
-                progressDialog.dismiss();
-
-                // Printing uploading success message coming from server on android app.
-                Toast.makeText(FixStuff.this,string1,Toast.LENGTH_LONG).show();
-
-                // Setting image as transparent after done uploading.
-                imageViewFixIt.setImageResource(android.R.color.transparent);
-
-
-            }
-
-            @Override
-            protected String doInBackground(Void... params) {
-
-                ImageProcessClass imageProcessClass = new ImageProcessClass();
-
-                HashMap<String,String> HashMapParams = new HashMap<String,String>();
-
-                HashMapParams.put(ImageName, GetImageNameEditText);
-
-                HashMapParams.put(ImagePath, ConvertImage);
-
-                String FinalData = imageProcessClass.ImageHttpRequest(ServerUploadPath, HashMapParams);
-
-                return FinalData;
-            }
-        }
-        AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
-
-        AsyncTaskUploadClassOBJ.execute();
-    }
-
-    public class ImageProcessClass{
-
-        public String ImageHttpRequest(String requestURL,HashMap<String, String> PData) {
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            try {
-
-                URL url;
-                HttpURLConnection httpURLConnectionObject ;
-                OutputStream OutPutStream;
-                BufferedWriter bufferedWriterObject ;
-                BufferedReader bufferedReaderObject ;
-                int RC ;
-
-                url = new URL(requestURL);
-
-                httpURLConnectionObject = (HttpURLConnection) url.openConnection();
-
-                httpURLConnectionObject.setReadTimeout(19000);
-
-                httpURLConnectionObject.setConnectTimeout(19000);
-
-                httpURLConnectionObject.setRequestMethod("POST");
-
-                httpURLConnectionObject.setDoInput(true);
-
-                httpURLConnectionObject.setDoOutput(true);
-
-                OutPutStream = httpURLConnectionObject.getOutputStream();
-
-                bufferedWriterObject = new BufferedWriter(
-
-                        new OutputStreamWriter(OutPutStream, "UTF-8"));
-
-                bufferedWriterObject.write(bufferedWriterDataFN(PData));
-
-                bufferedWriterObject.flush();
-
-                bufferedWriterObject.close();
-
-                OutPutStream.close();
-
-                RC = httpURLConnectionObject.getResponseCode();
-
-                if (RC == HttpURLConnection.HTTP_OK) {
-                    bufferedReaderObject = new BufferedReader(new InputStreamReader(httpURLConnectionObject.getInputStream()));
-
-                    stringBuilder = new StringBuilder();
-
-                    String RC2;
-
-                    while ((RC2 = bufferedReaderObject.readLine()) != null){
-
-                        stringBuilder.append(RC2);
-                    }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return stringBuilder.toString();
-        }
-
-        private String bufferedWriterDataFN(HashMap<String, String> HashMapParams) throws UnsupportedEncodingException {
-
-            StringBuilder stringBuilderObject;
-
-            stringBuilderObject = new StringBuilder();
-
-            for (Map.Entry<String, String> KEY : HashMapParams.entrySet()) {
-
-                if (check)
-
-                    check = false;
-                else
-                    stringBuilderObject.append("&");
-
-                stringBuilderObject.append(URLEncoder.encode(KEY.getKey(), "UTF-8"));
-
-                stringBuilderObject.append("=");
-
-                stringBuilderObject.append(URLEncoder.encode(KEY.getValue(), "UTF-8"));
-            }
-
-            return stringBuilderObject.toString();
-        }
-
-    }
+    ProgressDialog progressDialog ; //might be useful
 
 
         @Override
@@ -299,8 +150,14 @@ public class FixStuff extends AppCompatActivity {
             try {
 
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] b = baos.toByteArray();
+                encodedImage= Base64.encodeToString(b, Base64.DEFAULT);
 
                 imageViewFixIt.setImageBitmap(bitmap);
+
+
 
             } catch (IOException e) {
 
@@ -318,15 +175,13 @@ public class FixStuff extends AppCompatActivity {
         createFixIt();
         UserId.setText("");
         LocationId.setText("");
-        Image.setText("");
         Description.setText("");
         Fixed.setChecked(false);
     }
 
     private void createFixIt(){
         int uId, lId, fix;
-        String image, description;
-        image = Image.getText().toString().trim();
+        String description;
         description = Description.getText().toString().trim();
         uId = Integer.parseInt(UserId.getText().toString().trim());
         lId = Integer.parseInt(LocationId.getText().toString().trim());
@@ -348,10 +203,14 @@ public class FixStuff extends AppCompatActivity {
             return;
         }
 
+
+
         HashMap<String, String> params = new HashMap<>();
         params.put("UserId", Integer.toString(uId));
         params.put("LocationId", Integer.toString(lId));
-        params.put("Image", image);
+        params.put("Image", encodedImage);
+
+        params.put("ImagePath", "location");
         params.put("Description", description);
         params.put("Fixed", Integer.toString(fix));
 
@@ -364,6 +223,7 @@ public class FixStuff extends AppCompatActivity {
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_READ_FIXIT, null, CODE_GET_REQUEST);
         request.execute();
     }
+
 
 
 }
