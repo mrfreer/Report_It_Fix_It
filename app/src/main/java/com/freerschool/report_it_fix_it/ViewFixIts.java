@@ -1,11 +1,14 @@
 package com.freerschool.report_it_fix_it;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +41,7 @@ public class ViewFixIts extends AppCompatActivity {
     }
 
     EditText editTextUserId, editTextLocationId, editTextImage, editTextDescription;
+    ImageView picToFix;
     CheckBox checkBoxFixed;
     ListView listView;
     Button button;
@@ -45,13 +50,12 @@ public class ViewFixIts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_fix_its);
-
+        picToFix = findViewById(R.id.imageViewIconFix);
         editTextUserId = findViewById(R.id.editTextUserId);
         editTextLocationId = findViewById(R.id.editTextLocationId);
         editTextImage = findViewById(R.id.editTextImage);
         editTextDescription = findViewById(R.id.editTextDescription);
         checkBoxFixed = findViewById(R.id.checkBoxFixed);
-        //if I name these controls the same as in another Activity, can I access them?
         button = findViewById(R.id.button);
         listView = findViewById(R.id.listViewFixIts);
         thingsToFix = new ArrayList<>();
@@ -138,6 +142,7 @@ public class ViewFixIts extends AppCompatActivity {
 
     class FixItAdapter extends ArrayAdapter<ThingsToFix> {
 
+
         List<ThingsToFix> thingsToFixList;
         public FixItAdapter(List<ThingsToFix> thingsToFixList) {
             super(ViewFixIts.this, R.layout.things_to_fix_layout, thingsToFixList);
@@ -145,13 +150,26 @@ public class ViewFixIts extends AppCompatActivity {
         }
 
 
+        public Bitmap StringToBitMap(String encodedString) {
+            try {
+                byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                return bitmap;
+            } catch (Exception e) {
+                e.getMessage();
+                return null;
+            }
+        }
+
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
             View listViewItem = inflater.inflate(R.layout.things_to_fix_layout, null, true);
             TextView textViewName = listViewItem.findViewById(R.id.textViewName);
-
+            ImageView curImage = listViewItem.findViewById(R.id.imageViewIconFix);
             TextView textViewUpdate = listViewItem.findViewById(R.id.textViewUpdate);
             TextView textViewDelete = listViewItem.findViewById(R.id.textViewDelete);
+            Bitmap bm = StringToBitMap(thingsToFixList.get(position).getImage());
+            curImage.setImageBitmap(bm);
             final ThingsToFix thingsToFix = thingsToFixList.get(position);
             textViewName.setText(thingsToFix.getDescription());
             textViewUpdate.setOnClickListener(new View.OnClickListener(){
