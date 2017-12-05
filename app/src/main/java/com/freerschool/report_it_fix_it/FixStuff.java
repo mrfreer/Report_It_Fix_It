@@ -92,7 +92,7 @@ public class FixStuff extends AppCompatActivity {
     //Attributes
     ImageButton camera;
     ImageView imageViewFixIt;
-    EditText UserId, LocationId, Image, Description;
+    EditText LocationId, Description;
     CheckBox Fixed;
     List<ThingsToFix> thingsToFixList;
     static final int CAMERA_PIC_REQUEST = 1;
@@ -144,7 +144,6 @@ public class FixStuff extends AppCompatActivity {
         super.onActivityResult(RC, RQC, I);
 
         if (RC == 1 && RQC == RESULT_OK && I != null && I.getData() != null) {
-
             Uri uri = I.getData();
 
             try {
@@ -167,23 +166,19 @@ public class FixStuff extends AppCompatActivity {
     }
 
     public void fixIt(View view){
-        UserId = findViewById(R.id.editTextUserId);
         LocationId = findViewById(R.id.editTextLocationId);
-        Image = findViewById(R.id.editTextImage);
         Description = findViewById(R.id.editTextDescription);
         Fixed = findViewById(R.id.checkBoxFixed);
         createFixIt();
-        UserId.setText("");
         LocationId.setText("");
         Description.setText("");
         Fixed.setChecked(false);
     }
 
     private void createFixIt(){
-        int uId, lId, fix;
+        int lId, fix;
         String description;
         description = Description.getText().toString().trim();
-        uId = Integer.parseInt(UserId.getText().toString().trim());
         lId = Integer.parseInt(LocationId.getText().toString().trim());
         if(Fixed.isChecked()){
             fix = 1;
@@ -197,19 +192,13 @@ public class FixStuff extends AppCompatActivity {
             return;
         }
 
-        if(TextUtils.isEmpty(Integer.toString(uId))){
-            UserId.setError("Please enter a user id");
-            UserId.requestFocus();
-            return;
-        }
-
 
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("UserId", Integer.toString(uId));
+        Intent intent = getIntent();
+        params.put("UserName", intent.getStringExtra("UserName"));
         params.put("LocationId", Integer.toString(lId));
         params.put("Image", encodedImage);
-
         params.put("ImagePath", "location");
         params.put("Description", description);
         params.put("Fixed", Integer.toString(fix));

@@ -1,5 +1,6 @@
 package com.freerschool.report_it_fix_it;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -40,20 +41,22 @@ public class ViewFixIts extends AppCompatActivity {
         request.execute();
     }
 
-    EditText editTextUserId, editTextLocationId, editTextImage, editTextDescription;
+    EditText editTextLocationId, editTextDescription;
     ImageView picToFix;
     CheckBox checkBoxFixed;
     ListView listView;
     Button button;
     List<ThingsToFix> thingsToFix;
+    String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_fix_its);
         picToFix = findViewById(R.id.imageViewIconFix);
-        editTextUserId = findViewById(R.id.editTextUserId);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("UserName");
+        Log.v("user", userName);
         editTextLocationId = findViewById(R.id.editTextLocationId);
-        editTextImage = findViewById(R.id.editTextImage);
         editTextDescription = findViewById(R.id.editTextDescription);
         checkBoxFixed = findViewById(R.id.checkBoxFixed);
         button = findViewById(R.id.button);
@@ -80,7 +83,7 @@ public class ViewFixIts extends AppCompatActivity {
             }
             thingsToFix.add(new ThingsToFix(
                     obj.getInt("Things_Id"),
-                    obj.getInt("UserId"),
+                    userName,
                     obj.getInt("LocationId"),
                     obj.getString("Image"),
                     obj.getString("Description"),
@@ -176,14 +179,10 @@ public class ViewFixIts extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     isUpdating = true;
-                    editTextUserId.setEnabled(true);
                     editTextLocationId.setEnabled(true);
-                    editTextImage.setEnabled(true);
                     editTextDescription.setEnabled(true);
-                    editTextUserId.setText(String.valueOf(thingsToFix.getUserId()));
                     editTextLocationId.setText(String.valueOf(thingsToFix.getLocationId()));
                     editTextDescription.setText(thingsToFix.getDescription());
-                    editTextImage.setText(thingsToFix.getImage());
                     checkBoxFixed.setChecked(thingsToFix.isFixed());
                     button.setText("Update");
                 }

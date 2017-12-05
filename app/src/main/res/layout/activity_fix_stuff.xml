@@ -8,47 +8,38 @@
     tools:layout_editor_absoluteY="25dp">
 
     <EditText
-        android:id="@+id/editTextUserId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
-        android:ems="10"
-        android:hint="User Id"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLocationId"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/editTextLocationId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="37dp"
+        android:layout_marginBottom="55dp"
+        android:layout_marginTop="89dp"
         android:ems="10"
         android:hint="Location Id"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
-        app:layout_constraintStart_toStartOf="@+id/editTextUserId"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserId" />
+        app:layout_constraintEnd_toStartOf="@+id/imageViewFixIt"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFixIt"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="210dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="88dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewFixIt" />
+        app:layout_constraintBottom_toTopOf="@+id/checkBoxFixed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
 
     <CheckBox
         android:id="@+id/checkBoxFixed"
-        android:layout_width="209dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="213dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="39dp"
         android:text="Fixed?"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,11 +62,11 @@
         android:id="@+id/imageButtonCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginStart="85dp"
         android:onClick="addImage"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDescription"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSelect"
         app:layout_constraintEnd_toStartOf="@+id/imageViewFixIt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLocationId"
@@ -84,15 +75,14 @@
     <ImageView
         android:id="@+id/imageViewFixIt"
         android:layout_width="0dp"
-        android:layout_height="91dp"
-        android:layout_marginBottom="65dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
         android:layout_marginEnd="73dp"
-        android:layout_marginTop="65dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDescription"
+        android:layout_marginTop="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSelect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButtonCamera"
-        app:layout_constraintTop_toTopOf="@+id/editTextLocationId"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLocationId"
         app:srcCompat="@android:color/holo_blue_dark" />
 
     <Button
@@ -100,8 +90,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="16dp"
         android:text="Select From Gallery"
         app:layout_constraintBottom_toTopOf="@+id/editTextDescription"
-        app:layout_constraintStart_toStartOf="@+id/editTextDescription" />
+        app:layout_constraintStart_toStartOf="@+id/editTextDescription"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonCamera" />
 </android.support.constraint.ConstraintLayout>

@@ -11,10 +11,11 @@
         android:id="@+id/my_toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="91dp"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,32 +25,30 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="424dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="437dp"
         android:text="Let's Fix It!"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonFixIt"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <Button
         android:id="@+id/buttonFixIt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="172dp"
+        android:layout_height="73dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:onClick="fixIt"
         android:text="Fix Something New"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/button3" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="151dp"
-        android:layout_height="68dp"
+        android:layout_height="73dp"
         android:layout_marginBottom="18dp"
         android:layout_marginEnd="14dp"
         android:layout_marginStart="32dp"
@@ -61,10 +60,13 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="109dp"
         android:onClick="googleLogin"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="410dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
 </android.support.constraint.ConstraintLayout>

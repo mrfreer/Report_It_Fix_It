@@ -25,10 +25,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         account = GoogleSignIn.getLastSignedInAccount(this);
         if(account == null){
-
+            Log.v("logged", "nobody's logged in");
         }
         else{
             signInButton.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, "Welcome " + account.getGivenName().toString(), Toast.LENGTH_LONG).show();
             Log.v("setGoogle", account.getAccount().toString());
         }
 
@@ -48,12 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void fixIt(View view){
         Intent intent = new Intent(this, FixStuff.class);
+        intent.putExtra("UserName", account.getEmail());
         startActivity(intent);
 
     }
 
     public void viewFixIts(View view){
         Intent intent = new Intent(this, ViewFixIts.class);
+        intent.putExtra("UserName", account.getEmail());
         startActivity(intent);
     }
 
