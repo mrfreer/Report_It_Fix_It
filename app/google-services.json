@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "25490482128",
+    "project_id": "report-it-fix-it"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25490482128:android:c3ae28860aa58f67",
+        "android_client_info": {
+          "package_name": "com.freerschool.report_it_fix_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25490482128-lsr0iljp15srr660jo62vd2sl03nq2on.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "25490482128-pjv9a4o8vnk2ch5r3qtq7mi7s9ngm698.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerschool.report_it_fix_it",
+            "certificate_hash": "7fa32e8b79fdb0c08903ab09184cbf1d7390eccb"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKTQBPF4qfbpqrdcboSz7Zs_ufafpJ4yg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
