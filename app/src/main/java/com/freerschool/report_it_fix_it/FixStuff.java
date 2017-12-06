@@ -329,7 +329,7 @@ public class FixStuff extends AppCompatActivity {
             ActivityCompat.requestPermissions(FixStuff.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
+        }//test
     }
 
     private boolean checkPermissions() {
