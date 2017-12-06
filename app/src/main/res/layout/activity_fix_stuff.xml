@@ -8,38 +8,23 @@
     tools:layout_editor_absoluteY="25dp">
 
     <EditText
-        android:id="@+id/editTextLocationId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
-        android:layout_marginTop="89dp"
-        android:ems="10"
-        android:hint="Location Id"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewFixIt"
-        app:layout_constraintStart_toStartOf="@+id/imageViewFixIt"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/checkBoxFixed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
 
     <CheckBox
         android:id="@+id/checkBoxFixed"
         android:layout_width="213dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="39dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="29dp"
         android:text="Fixed?"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,49 +35,70 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginBottom="63dp"
         android:onClick="fixIt"
         android:text="Fix It!"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/checkBoxFixed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxFixed" />
 
     <ImageButton
         android:id="@+id/imageButtonCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="85dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginStart="31dp"
         android:onClick="addImage"
         app:layout_constraintBottom_toTopOf="@+id/buttonSelect"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewFixIt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLocationId"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFixIt"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFixIt"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <ImageView
         android:id="@+id/imageViewFixIt"
-        android:layout_width="0dp"
+        android:layout_width="119dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginTop="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSelect"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButtonCamera"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLocationId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLocationAddressTextView"
         app:srcCompat="@android:color/holo_blue_dark" />
 
     <Button
         android:id="@+id/buttonSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginStart="18dp"
         android:text="Select From Gallery"
         app:layout_constraintBottom_toTopOf="@+id/editTextDescription"
         app:layout_constraintStart_toStartOf="@+id/editTextDescription"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonCamera" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/mLocationAddressTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mLocationAddressTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginTop="3dp"
+        android:text="Location"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFixIt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/progress_bar"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
