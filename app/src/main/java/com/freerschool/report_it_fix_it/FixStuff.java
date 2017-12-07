@@ -73,7 +73,6 @@ public class FixStuff extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     //Provides access to the Fused Location Provider API.
     private Location mLastLocation;
-
     private boolean mAddressRequested;
     /**
      * Tracks whether the user has requested an address. Becomes true when the user requests an
@@ -393,6 +392,7 @@ public class FixStuff extends AppCompatActivity {
                 }
             }
         };
+        mResultReceiver = new AddressResultReceiver(new Handler());
         mRequestingLocationUpdates = false;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //mLocationRequest = mFusedLocationClient.getLastLocation();
