@@ -5,8 +5,8 @@ package com.freerschool.report_it_fix_it;
  */
 
 public class ThingsToFix {
-    private int things_id, locationId;
-    private String image, description, userName;
+    private int things_id;
+    private String image, description, userName, location;
     private boolean fixed;
 
 
@@ -15,10 +15,10 @@ public class ThingsToFix {
         //empty constructor!
     }
 
-    public ThingsToFix(int things_id, String userName, int locationId, String image, String description, boolean fixed) {
+    public ThingsToFix(int things_id, String userName, String location, String image, String description, boolean fixed) {
         this.things_id = things_id;
         this.userName = userName;
-        this.locationId = locationId;
+        this.location = location;
         this.image = image;
         this.description = description;
         this.fixed = fixed;
@@ -32,13 +32,12 @@ public class ThingsToFix {
         this.userName = userName;
     }
 
-
-    public int getLocationId() {
-        return locationId;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getImage() {

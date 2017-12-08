@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'reportit'
             keyPassword 'ebola6'
-            storeFile file('C:/Users/dfreer/Documents/reportit.jks')
+            storeFile file('C:/Users/Kentec/Documents/reportit.jks')
             storePassword 'ebola6'
         }
     }

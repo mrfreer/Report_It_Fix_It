@@ -84,7 +84,7 @@ public class ViewFixIts extends AppCompatActivity {
             thingsToFix.add(new ThingsToFix(
                     obj.getInt("Things_Id"),
                     userName,
-                    obj.getInt("LocationId"),
+                    obj.getString("Location"),
                     obj.getString("Image"),
                     obj.getString("Description"),
                     curFixed
@@ -181,7 +181,7 @@ public class ViewFixIts extends AppCompatActivity {
                     isUpdating = true;
                     editTextLocationId.setEnabled(true);
                     editTextDescription.setEnabled(true);
-                    editTextLocationId.setText(String.valueOf(thingsToFix.getLocationId()));
+                    editTextLocationId.setText(String.valueOf(thingsToFix.getLocation()));
                     editTextDescription.setText(thingsToFix.getDescription());
                     checkBoxFixed.setChecked(thingsToFix.isFixed());
                     button.setText("Update");

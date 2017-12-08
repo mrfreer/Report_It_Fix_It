@@ -40,6 +40,7 @@
         android:text="Fix It!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxFixed" />
 
@@ -63,7 +64,7 @@
         app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mLocationAddressTextView"
+        app:layout_constraintTop_toBottomOf="@+id/location_address_view"
         app:srcCompat="@android:color/holo_blue_dark" />
 
     <Button
@@ -85,12 +86,12 @@
         android:layout_marginEnd="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/mLocationAddressTextView"
+        app:layout_constraintEnd_toStartOf="@+id/location_address_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mLocationAddressTextView"
+        android:id="@+id/location_address_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="19dp"
@@ -101,4 +102,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/progress_bar"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/fetch_address_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Location"
+        android:onClick="fetchAddressButtonHandler"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxFixed"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxFixed" />
 </android.support.constraint.ConstraintLayout>
