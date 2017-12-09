@@ -41,13 +41,14 @@ public class ViewFixIts extends AppCompatActivity {
         request.execute();
     }
 
-    EditText editTextLocationId, editTextDescription;
+    EditText editTextLocation, editTextDescription;
     ImageView picToFix;
     CheckBox checkBoxFixed;
     ListView listView;
     Button button;
     List<ThingsToFix> thingsToFix;
     String userName;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class ViewFixIts extends AppCompatActivity {
         Intent intent = getIntent();
         userName = intent.getStringExtra("UserName");
         Log.v("user", userName);
-        editTextLocationId = findViewById(R.id.editTextLocationId);
+        editTextLocation = findViewById(R.id.editTextLocation);
         editTextDescription = findViewById(R.id.editTextDescription);
         checkBoxFixed = findViewById(R.id.checkBoxFixed);
         button = findViewById(R.id.button);
@@ -70,7 +71,6 @@ public class ViewFixIts extends AppCompatActivity {
     private void refreshFixIts(JSONArray fixIts) throws JSONException{
         //fixIts
         thingsToFix.clear();
-        Log.v("herehere", "do we");
         for(int i = 0; i < fixIts.length(); i++) {
             JSONObject obj = fixIts.getJSONObject(i);
             boolean curFixed;
@@ -83,7 +83,7 @@ public class ViewFixIts extends AppCompatActivity {
             }
             thingsToFix.add(new ThingsToFix(
                     obj.getInt("Things_Id"),
-                    userName,
+                    obj.getString("UserName"),
                     obj.getString("Location"),
                     obj.getString("Image"),
                     obj.getString("Description"),
@@ -93,6 +93,39 @@ public class ViewFixIts extends AppCompatActivity {
             FixItAdapter adapter = new FixItAdapter(thingsToFix);
             listView.setAdapter(adapter);
 
+    }
+
+    public void delete(View view){
+        deleteFixIt(id);
+    }
+
+    public void deleteFixIt(String fix_it_id){
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_DELETE_FIXIT + fix_it_id, null, CODE_GET_REQUEST);
+        request.execute();
+    }
+
+    public void updateFixIt(View view){
+        String location = editTextLocation.getText().toString();
+        Log.v("locationfun", location);
+        String description = editTextDescription.getText().toString();
+        String checked;
+        if(checkBoxFixed.isChecked()){
+            checked = "1";
+        }
+        else{
+            checked = "0";
+        }
+        HashMap<String, String> params = new HashMap<>();
+        params.put("Location", location);
+        params.put("Description", description);
+        params.put("Things_Id", id);
+        params.put("Fixed", checked);
+        Log.v("things_id", id);
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_FIXIT, params, CODE_POST_REQUEST);
+        request.execute();
+        editTextDescription.setText("");
+        editTextLocation.setText("");
+        isUpdating = false;
     }
 
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
@@ -115,7 +148,6 @@ public class ViewFixIts extends AppCompatActivity {
 
         protected void onPostExecute(String s){
             super.onPostExecute(s);
-            Log.v("testinghere", s);
             try{
                 JSONObject object = new JSONObject(s);
                 if(!object.getBoolean("error")){
@@ -124,7 +156,6 @@ public class ViewFixIts extends AppCompatActivity {
                 }
             }
             catch (JSONException e){
-                Log.v("gethere", "dowegethere");
                 e.printStackTrace();
             }
         }
@@ -139,7 +170,7 @@ public class ViewFixIts extends AppCompatActivity {
             if(requestCode == CODE_GET_REQUEST){
                 return requestHandler.sendGetRequest(url);
             }
-            return null; //uh oh
+            return null;
         }
     }
 
@@ -179,12 +210,21 @@ public class ViewFixIts extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     isUpdating = true;
-                    editTextLocationId.setEnabled(true);
+                    editTextLocation.setEnabled(true);
                     editTextDescription.setEnabled(true);
-                    editTextLocationId.setText(String.valueOf(thingsToFix.getLocation()));
+                    id = Integer.toString(thingsToFix.getThings_id());
+                    editTextLocation.setText(String.valueOf(thingsToFix.getLocation()));
                     editTextDescription.setText(thingsToFix.getDescription());
                     checkBoxFixed.setChecked(thingsToFix.isFixed());
                     button.setText("Update");
+                }
+            });
+
+            textViewDelete.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    id = Integer.toString(thingsToFix.getThings_id());
+                    deleteFixIt(id);
                 }
             });
 

@@ -24,6 +24,14 @@ public class ThingsToFix {
         this.fixed = fixed;
     }
 
+    public int getThings_id() {
+        return things_id;
+    }
+
+    public void setThings_id(int things_id) {
+        this.things_id = things_id;
+    }
+
     public String getUserName() {
         return userName;
     }

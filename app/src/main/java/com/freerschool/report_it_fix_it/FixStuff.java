@@ -258,7 +258,7 @@ public class FixStuff extends AppCompatActivity {
     }
 
     public void fixIt(View view){
-        LocationId = findViewById(R.id.editTextLocationId);
+        LocationId = findViewById(R.id.editTextLocation);
         Description = findViewById(R.id.editTextDescription);
         Fixed = findViewById(R.id.checkBoxFixed);
         createFixIt();

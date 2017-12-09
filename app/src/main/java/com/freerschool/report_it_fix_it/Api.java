@@ -9,6 +9,6 @@ public class Api {
     public static final String URL_CREATE_FIXIT = ROOT_URL + "createfixit";
     public static final String URL_READ_FIXIT = ROOT_URL + "getfixit";
     public static final String URL_UPDATE_FIXIT = ROOT_URL + "updatefixit";
-    public static final String URL_DELETE_FIXIT = ROOT_URL + "deletefixit&id=";
+    public static final String URL_DELETE_FIXIT = ROOT_URL + "deletefixit&Things_Id=";
     //awesome.
 }
