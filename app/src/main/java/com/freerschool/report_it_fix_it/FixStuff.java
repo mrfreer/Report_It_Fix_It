@@ -170,7 +170,7 @@ public class FixStuff extends AppCompatActivity {
     //Attributes
     ImageButton camera;
     ImageView imageViewFixIt;
-    EditText LocationId, Description;
+    EditText Description;
     CheckBox Fixed;
     List<ThingsToFix> thingsToFixList;
     static final int CAMERA_PIC_REQUEST = 1;
@@ -258,11 +258,9 @@ public class FixStuff extends AppCompatActivity {
     }
 
     public void fixIt(View view){
-        LocationId = findViewById(R.id.editTextLocation);
         Description = findViewById(R.id.editTextDescription);
         Fixed = findViewById(R.id.checkBoxFixed);
         createFixIt();
-        LocationId.setText("");
         Description.setText("");
         Fixed.setChecked(false);
     }

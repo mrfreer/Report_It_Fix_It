@@ -102,6 +102,7 @@ public class ViewFixIts extends AppCompatActivity {
     public void deleteFixIt(String fix_it_id){
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_DELETE_FIXIT + fix_it_id, null, CODE_GET_REQUEST);
         request.execute();
+        readFixIt();
     }
 
     public void updateFixIt(View view){
@@ -125,6 +126,7 @@ public class ViewFixIts extends AppCompatActivity {
         request.execute();
         editTextDescription.setText("");
         editTextLocation.setText("");
+        readFixIt();
         isUpdating = false;
     }
 
