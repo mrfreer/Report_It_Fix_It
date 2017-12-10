@@ -154,7 +154,7 @@ public class ViewFixIts extends AppCompatActivity {
                 JSONObject object = new JSONObject(s);
                 if(!object.getBoolean("error")){
                     Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
-                    refreshFixIts(object.getJSONArray("fixit"));//object.getJSONArray("fixIts"));
+                    refreshFixIts(object.getJSONArray("fixit"));
                 }
             }
             catch (JSONException e){

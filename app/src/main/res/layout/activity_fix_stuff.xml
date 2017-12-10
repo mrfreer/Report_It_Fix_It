@@ -7,109 +7,197 @@
     tools:context="com.freerschool.report_it_fix_it.FixStuff"
     tools:layout_editor_absoluteY="25dp">
 
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:ems="10"
-        android:hint="Description"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/checkBoxFixed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
-
-    <CheckBox
-        android:id="@+id/checkBoxFixed"
-        android:layout_width="213dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="29dp"
-        android:text="Fixed?"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="63dp"
+        android:layout_marginBottom="16dp"
         android:onClick="fixIt"
         android:text="Fix It!"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.564"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxFixed" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:layout_marginStart="31dp"
         android:onClick="addImage"
         app:layout_constraintBottom_toTopOf="@+id/buttonSelect"
-        app:layout_constraintStart_toStartOf="@+id/imageViewFixIt"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFixIt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <ImageView
         android:id="@+id/imageViewFixIt"
         android:layout_width="119dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_address_view"
-        app:srcCompat="@android:color/holo_blue_dark" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@android:color/holo_blue_dark"
+        tools:layout_editor_absoluteY="32dp" />
 
     <Button
         android:id="@+id/buttonSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:layout_marginStart="18dp"
         android:text="Select From Gallery"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDescription"
-        app:layout_constraintStart_toStartOf="@+id/editTextDescription"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonCamera" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/location_address_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
     <TextView
         android:id="@+id/location_address_view"
-        android:layout_width="0dp"
+        android:layout_width="168dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="19dp"
-        android:layout_marginEnd="129dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="16dp"
         android:text="Location"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewFixIt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/progress_bar"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/fetch_address_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Location"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
         android:onClick="fetchAddressButtonHandler"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/checkBoxFixed"
-        app:layout_constraintStart_toStartOf="@+id/checkBoxFixed" />
+        android:text="Get Location"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="330dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="249dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="120dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:text="What's wrong?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="249dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline4" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingTop="5dp"
+        android:text="Closest building?"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline4" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="413dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Description of problem:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline7" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="442dp" />
+
+    <EditText
+        android:id="@+id/editTextProblem"
+        android:layout_width="235dp"
+        android:layout_height="75dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp"
+        app:layout_constraintRight_toRightOf="@+id/guideline11"
+        app:layout_constraintTop_toBottomOf="@+id/guideline7" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="395dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Exact Room (if possible):"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProblem" />
+
+    <EditText
+        android:id="@+id/editTextRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:hint="Room:"
+        android:inputType="textPersonName"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProblem" />
 </android.support.constraint.ConstraintLayout>

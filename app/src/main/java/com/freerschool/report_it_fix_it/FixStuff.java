@@ -24,12 +24,14 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -170,8 +172,7 @@ public class FixStuff extends AppCompatActivity {
     //Attributes
     ImageButton camera;
     ImageView imageViewFixIt;
-    EditText Description;
-    CheckBox Fixed;
+    EditText Description, editTextRoom;
     List<ThingsToFix> thingsToFixList;
     static final int CAMERA_PIC_REQUEST = 1;
 
@@ -180,7 +181,7 @@ public class FixStuff extends AppCompatActivity {
     Bitmap bitmap;
     Button selectImageGallery;
     String encodedImage = "";
-
+    Spinner dropdown, spinBuildings;
     ProgressDialog progressDialog ; //might be useful
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +190,7 @@ public class FixStuff extends AppCompatActivity {
         selectImageGallery = findViewById(R.id.buttonSelect);
 
             imageViewFixIt = findViewById(R.id.imageViewFixIt);
+            editTextRoom = findViewById(R.id.editTextRoom);
             selectImageGallery.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -200,7 +202,37 @@ public class FixStuff extends AppCompatActivity {
                 }
             });
         thingsToFixList = new ArrayList<>();
+            //get the spinner from the xml.
+            dropdown = (Spinner)findViewById(R.id.spinner1);
+            spinBuildings = findViewById(R.id.spinner2);
+            //buildings 1 - 8
+            ArrayList<String> buildings = new ArrayList<>();
+            for(int i = 1; i <= 8; i++){
+                buildings.add("Building " + i);
+            }
+            buildings.add("Building L");
+            buildings.add("Building M");
+            buildings.add("Building N");
+            buildings.add("Building R");
+            buildings.add("Building T");
 
+            for(int i = 1; i <= 14; i++){
+                buildings.add("Parking Lot " + i);
+            }
+            //create a list of items for the spinner.
+            String[] items = new String[]{"Plumbing", "Electrical", "Landscaping", "Other"};
+            //create an adapter to describe how the items are displayed, adapters are used in several places in android.
+            //There are multiple variations of this, but this is the basic variant.
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+            String [] items2 = new String[buildings.size()];
+            for(int i = 0; i < buildings.size(); i++){
+                items2[i] = buildings.get(i);
+            }
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
+                    items2);
+            //set the spinners adapter to the previously created one.
+            dropdown.setAdapter(adapter);
+            spinBuildings.setAdapter(adapter1);
             mResultReceiver = new AddressResultReceiver(new Handler());
 
             mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
@@ -215,7 +247,7 @@ public class FixStuff extends AppCompatActivity {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
             updateUIWidgets();
-
+            fetchAddressButtonHandler();
     }
 
 
@@ -258,26 +290,17 @@ public class FixStuff extends AppCompatActivity {
     }
 
     public void fixIt(View view){
-        Description = findViewById(R.id.editTextDescription);
-        Fixed = findViewById(R.id.checkBoxFixed);
         createFixIt();
-        Description.setText("");
-        Fixed.setChecked(false);
     }
 
 
     private void createFixIt(){
         String location;
-        int fix;
+        int fix = 0; //not fixed when reported
         String description;
-        description = Description.getText().toString().trim();
+        description = dropdown.getSelectedItem().toString().trim();
         location = mLocationAddressTextView.getText().toString().trim();
-        if(Fixed.isChecked()){
-            fix = 1;
-        }
-        else{
-            fix = 0;
-        }
+
         if(TextUtils.isEmpty(description)){
             Description.setError("Please enter description");
             Description.requestFocus();
@@ -293,10 +316,12 @@ public class FixStuff extends AppCompatActivity {
         params.put("ImagePath", "location");
         params.put("Description", description);
         params.put("Fixed", Integer.toString(fix));
-
+        params.put("Category", dropdown.getSelectedItem().toString());
+        params.put("Building", spinBuildings.getSelectedItem().toString());
+        params.put("Room", editTextRoom.getText().toString());
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_FIXIT, params, CODE_POST_REQUEST);
         request.execute();
-
+        editTextRoom.setText("");
     }
 
     private void readFixIt(){
@@ -337,7 +362,7 @@ public class FixStuff extends AppCompatActivity {
      * Runs when user clicks the Fetch Address button.
      */
     @SuppressWarnings("unused")
-    public void fetchAddressButtonHandler(View view) {
+    public void fetchAddressButtonHandler() {
         Log.v(TAG, "clicking here");
         if (mLastLocation != null) {
             startIntentService();
