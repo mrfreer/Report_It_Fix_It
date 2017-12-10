@@ -9,11 +9,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="384dp"
-        android:layout_height="567dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
         android:padding="15dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/mdclogo" />
+        android:src="@drawable/mdclogo"
+        tools:ignore="ContentDescription" />
 
 
     <TextView
@@ -30,17 +35,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="350dp"
+        android:layout_width="384dp"
         android:layout_height="90dp"
         android:background="@android:color/background_light"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/guideline5"
-        tools:layout_editor_absoluteX="17dp">
+        android:orientation="horizontal"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/guideline5">
 
         <Button
             android:id="@+id/view_to_fix"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:elevation="0dp"
@@ -52,11 +57,11 @@
         <Button
             android:id="@+id/buttonFixIt"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="fixIt"
-            android:text="Fix Something New"
+            android:text="Report Something"
             tools:layout_editor_absoluteY="496dp" />
     </LinearLayout>
 
@@ -65,19 +70,29 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline10">
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            android:padding="5dp"
+            android:text="Status:"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status"
-            app:layout_constraintVertical_bias="0.902">
+            android:layout_alignParentTop="true">
 
         </com.google.android.gms.common.SignInButton>
 
@@ -116,27 +131,6 @@
             tools:layout_editor_absoluteX="76dp"
             tools:layout_editor_absoluteY="449dp" />
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/disconnect_button"
-            android:background="@color/colorPrimary"
-            android:text="Status:"
-            android:textColor="@android:color/white"
-            tools:layout_editor_absoluteX="248dp"
-            tools:layout_editor_absoluteY="350dp" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="91dp" />
-
     </RelativeLayout>
 
     <android.support.constraint.Guideline
@@ -144,7 +138,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="90dp" />
+        app:layout_constraintGuide_end="29dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="98dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="384dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="35dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="50dp" />
 
 </android.support.constraint.ConstraintLayout>
 
