@@ -9,8 +9,6 @@ public class ThingsToFix {
     private String image, description, userName, location;
     private boolean fixed;
 
-
-
     public ThingsToFix(){
         //empty constructor!
     }

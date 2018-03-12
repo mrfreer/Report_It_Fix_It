@@ -11,6 +11,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.MediaStore;
@@ -18,6 +19,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -57,6 +59,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -66,7 +69,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.Security;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -238,7 +243,7 @@ public class FixStuff extends AppCompatActivity {
             mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
             mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
             mFetchAddressButton = (Button) findViewById(R.id.fetch_address_button);
-
+            camera = findViewById(R.id.imageButtonCamera);
             // Set defaults, then update using values stored in the Bundle.
             mAddressRequested = false;
             mAddressOutput = "";
@@ -251,12 +256,70 @@ public class FixStuff extends AppCompatActivity {
     }
 
 
+    String mCurrentPhotoPath;
 
-    public void addImage(View view){
-        camera = findViewById(R.id.imageButtonCamera);
+    private File createImageFile() throws IOException{
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+
+    private void galleryAddPic(){
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }
+
+    private void setPic() {
+        // Get the dimensions of the View
+        int targetW = camera.getWidth();
+        int targetH = camera.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        camera.setImageBitmap(bitmap);
+    }
+
+
+    static final int REQUEST_TAKE_PHOTO = 1;
+    public void addImage(View view) throws IOException{
+
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(cameraIntent.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+            File photoFile = null;
+            try{
+                photoFile = createImageFile();
+            }catch (IOException ex){
+                Log.e("ERRORS", ex.getMessage());
+            }
+            if(photoFile != null){
+                Uri photoURI = FileProvider.getUriForFile(this, "com.freerschool.report_it_fix_it", photoFile);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
+                galleryAddPic();
+                setPic();
+            }
         }
     }
 
