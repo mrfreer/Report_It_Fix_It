@@ -180,7 +180,7 @@ public class FixStuff extends AppCompatActivity {
     EditText Description, editTextRoom;
     List<ThingsToFix> thingsToFixList;
     static final int CAMERA_PIC_REQUEST = 1;
-
+    private Bitmap image;
     LocationRequest mLocationRequest;
     boolean check = true;
     Bitmap bitmap;
@@ -188,6 +188,7 @@ public class FixStuff extends AppCompatActivity {
     String encodedImage = "";
     Spinner dropdown, spinBuildings;
     ProgressDialog progressDialog ; //might be useful
+    ImageView preview;
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -243,6 +244,8 @@ public class FixStuff extends AppCompatActivity {
             mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
             mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
             mFetchAddressButton = (Button) findViewById(R.id.fetch_address_button);
+            preview = (ImageView) findViewById(R.id.imageView2);
+
             camera = findViewById(R.id.imageButtonCamera);
             // Set defaults, then update using values stored in the Bundle.
             mAddressRequested = false;
@@ -258,99 +261,28 @@ public class FixStuff extends AppCompatActivity {
 
     String mCurrentPhotoPath;
 
-    private File createImageFile() throws IOException{
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
 
 
-    private void galleryAddPic(){
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(mCurrentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-    }
-
-    private void setPic() {
-        // Get the dimensions of the View
-        int targetW = camera.getWidth();
-        int targetH = camera.getHeight();
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        camera.setImageBitmap(bitmap);
-    }
 
 
-    static final int REQUEST_TAKE_PHOTO = 1;
+
+
     public void addImage(View view) throws IOException{
+        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),0);
 
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(cameraIntent.resolveActivity(getPackageManager()) != null){
-            File photoFile = null;
-            try{
-                photoFile = createImageFile();
-            }catch (IOException ex){
-                Log.e("ERRORS", ex.getMessage());
-            }
-            if(photoFile != null){
-                Uri photoURI = FileProvider.getUriForFile(this, "com.freerschool.report_it_fix_it", photoFile);
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
-                galleryAddPic();
-                setPic();
-            }
-        }
     }
-
-
 
     @Override
-    protected void onActivityResult(int RC, int RQC, Intent I) {
-
-        super.onActivityResult(RC, RQC, I);
-
-        if (RC == 1 && RQC == RESULT_OK && I != null && I.getData() != null) {
-            Uri uri = I.getData();
-
-            try {
-
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] b = baos.toByteArray();
-                encodedImage= Base64.encodeToString(b, Base64.DEFAULT);
-
-                imageViewFixIt.setImageBitmap(bitmap);
-
-
-
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode !=0){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            image = bitmap;
+            preview.setImageBitmap(bitmap);
+            camera.setImageBitmap(bitmap);
         }
     }
+
 
     public void fixIt(View view){
         createFixIt();
