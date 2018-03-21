@@ -19,6 +19,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -174,6 +175,7 @@ public class FixStuff extends AppCompatActivity {
         }
     }
 
+    private static final int MY_PERMISSIONS_CAMERA = 0;
     //Attributes
     ImageButton camera;
     ImageView imageViewFixIt;
@@ -190,6 +192,8 @@ public class FixStuff extends AppCompatActivity {
     ProgressDialog progressDialog ; //might be useful
     ImageView preview;
         @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_stuff);
@@ -261,16 +265,12 @@ public class FixStuff extends AppCompatActivity {
 
     String mCurrentPhotoPath;
 
-
-
-
-
-
-
-    public void addImage(View view) throws IOException{
+    public void TakePictureOnClick(View view){
         startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),0);
 
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -530,6 +530,9 @@ public class FixStuff extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION);
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
+    private static final int PERMISSION_REQUEST_CAMERA = 0;
+    private View mLayout;
+
 
     private void requestPermissions() {
         boolean shouldProvideRationale =
