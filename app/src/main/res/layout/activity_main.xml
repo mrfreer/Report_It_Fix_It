@@ -8,6 +8,66 @@
     tools:context="com.freerschool.report_it_fix_it.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="2dp"
+        android:text="Status:"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.411" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/signIn"
+        android:layout_width="379dp"
+        android:layout_height="119dp"
+        android:layout_weight="1"
+        android:padding="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline6">
+
+        <Button
+            android:id="@+id/sign_out_and_disconnect"
+            android:layout_width="103dp"
+            android:layout_height="29dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="beginSignOut"
+            android:text="Sign Out"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status">
+
+        </com.google.android.gms.common.SignInButton>
+
+    </android.support.constraint.ConstraintLayout>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -15,24 +75,27 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
     <ImageView
         android:id="@+id/imageView"
 
-        android:layout_width="354dp"
-        android:layout_height="534dp"
+        android:layout_width="376dp"
+        android:layout_height="277dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:padding="15dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/mdclogo"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signIn"
         tools:ignore="ContentDescription" />
 
 
@@ -46,16 +109,17 @@
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="30dp" />
+        tools:layout_editor_absoluteY="29dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="384dp"
+        android:layout_width="374dp"
         android:layout_height="90dp"
         android:background="@android:color/background_light"
         android:orientation="horizontal"
-        app:layout_constraintRight_toLeftOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/guideline5">
+        android:paddingRight="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="14dp">
 
         <Button
             android:id="@+id/view_to_fix"
@@ -65,6 +129,7 @@
             android:background="@android:color/transparent"
             android:elevation="0dp"
             android:onClick="viewFixIts"
+            android:shadowColor="?attr/colorPrimary"
             android:text="View Things To Fix"
             tools:layout_editor_absoluteX="205dp"
             tools:layout_editor_absoluteY="496dp" />
@@ -76,65 +141,11 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="fixIt"
+            android:shadowColor="?attr/colorPrimary"
             android:text="Report Something"
             tools:layout_editor_absoluteY="496dp" />
+
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline10">
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@color/colorPrimary"
-            android:padding="5dp"
-            android:text="Status:"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true">
-
-        </com.google.android.gms.common.SignInButton>
-
-        <Button
-            android:id="@+id/sign_out_button"
-            android:layout_width="107dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/sign_out_and_disconnect"
-            android:background="@android:color/background_light"
-            android:text="Sign Out"
-            tools:layout_editor_absoluteX="205dp"
-            tools:layout_editor_absoluteY="343dp" />
-
-        <Button
-            android:id="@+id/sign_out_and_disconnect"
-            android:layout_width="232dp"
-            android:layout_height="30dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:background="@android:color/background_light"
-            android:padding="4sp"
-            android:text="Sign Out And Disconnect"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="449dp" />
-
-    </RelativeLayout>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"
@@ -150,7 +161,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="98dp" />
+        app:layout_constraintGuide_percent="0.15174507" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline8"
@@ -176,17 +187,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="50dp" />
-
-    <Button
-        android:id="@+id/disconnect_button"
-        android:layout_width="118dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:background="@android:color/background_light"
-        android:text="Disconnect"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="120dp" />
 
 </android.support.constraint.ConstraintLayout>
 

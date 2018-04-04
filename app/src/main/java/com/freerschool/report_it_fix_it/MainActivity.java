@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements
     GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+    Button sign_out_and_disconnect;
+    com.google.android.gms.common.SignInButton sign_in_button;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -191,15 +193,18 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        sign_in_button = findViewById(R.id.sign_in_button);
+        sign_out_and_disconnect = findViewById(R.id.sign_out_and_disconnect);
         setSupportActionBar(myToolbar);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
         mStatusTextView = findViewById(R.id.status);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        if(account == null){
+            sign_out_and_disconnect.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void signIn() {
@@ -228,6 +233,8 @@ public class MainActivity extends AppCompatActivity implements
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            sign_in_button.setVisibility(View.INVISIBLE);
+            sign_out_and_disconnect.setVisibility(View.VISIBLE);
             handleSignInResult(task);
         }
     }
@@ -235,14 +242,8 @@ public class MainActivity extends AppCompatActivity implements
     private void updateUI(@Nullable GoogleSignInAccount account) {
         if (account != null) {
             mStatusTextView.setText(getString(R.string.signed_in_fmt, account.getDisplayName()));
-
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
-
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
     }
 
@@ -262,6 +263,9 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    public void beginSignOut(View view){
+        signOut();
+    }
 
     private void signOut() {
         mGoogleSignInClient.signOut()
@@ -270,6 +274,8 @@ public class MainActivity extends AppCompatActivity implements
                     public void onComplete(@NonNull Task<Void> task) {
                         // [START_EXCLUDE]
                         updateUI(null);
+                        sign_in_button.setVisibility(View.VISIBLE);
+                        sign_out_and_disconnect.setVisibility(View.INVISIBLE);
                         // [END_EXCLUDE]
                     }
                 });
@@ -282,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        // [START_EXCLUDE]
+                        // [START_EXCLUDE
                         updateUI(null);
                         // [END_EXCLUDE]
                     }
@@ -295,11 +301,8 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.sign_in_button:
                 signIn();
                 break;
-            case R.id.sign_out_button:
+            case R.id.sign_out_and_disconnect:
                 signOut();
-                break;
-            case R.id.disconnect_button:
-                revokeAccess();
                 break;
         }
     }
