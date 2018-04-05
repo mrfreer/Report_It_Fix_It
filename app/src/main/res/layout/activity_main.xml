@@ -8,6 +8,19 @@
     tools:context="com.freerschool.report_it_fix_it.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="2dp"
+        android:paddingTop="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar">
+
+    </com.google.android.gms.common.SignInButton>
+
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
@@ -52,19 +65,6 @@
             android:text="Sign Out"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:paddingTop="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status">
-
-        </com.google.android.gms.common.SignInButton>
 
     </android.support.constraint.ConstraintLayout>
 

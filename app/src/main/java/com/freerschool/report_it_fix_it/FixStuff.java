@@ -43,6 +43,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FixStuff extends AppCompatActivity {
     private static final int CODE_GET_REQUEST = 1024;
@@ -153,7 +154,6 @@ public class FixStuff extends AppCompatActivity {
     String encodedImage = "";
     Spinner spinnerWrong, spinnerBuilding;
     ProgressDialog progressDialog ; //might be useful
-    ImageView preview;
         @Override
 
 
@@ -210,7 +210,6 @@ public class FixStuff extends AppCompatActivity {
             Description = findViewById(R.id.editTextProblem);
             mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
             mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-            preview = (ImageView) findViewById(R.id.imageView2);
 
             camera = findViewById(R.id.imageButtonCamera);
             // Set defaults, then update using values stored in the Bundle.
@@ -240,7 +239,6 @@ public class FixStuff extends AppCompatActivity {
         if(resultCode !=0){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             image = bitmap;
-            preview.setImageBitmap(bitmap);
             camera.setImageBitmap(bitmap);
         }
     }
@@ -255,7 +253,7 @@ public class FixStuff extends AppCompatActivity {
         String location;
         int fix = 0; //not fixed when reported
         String description;
-        description = spinnerWrong.getSelectedItem().toString().trim();
+        description = Description.getText().toString();
         location = mLocationAddressTextView.getText().toString().trim();
 
         if(TextUtils.isEmpty(description)){
@@ -277,6 +275,12 @@ public class FixStuff extends AppCompatActivity {
         params.put("Category", spinnerWrong.getSelectedItem().toString());
         params.put("Building", spinnerBuilding.getSelectedItem().toString());
         params.put("Room", editTextRoom.getText().toString());
+        for (Map.Entry<String,String> entry : params.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            Log.v("TESTINGMAP", key + " key " + value + " value " );
+            // do stuff
+        }
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_FIXIT, params, CODE_POST_REQUEST);
         request.execute();
         editTextRoom.setText("");

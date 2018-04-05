@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ViewFixIts extends AppCompatActivity {
     private static final int CODE_GET_REQUEST = 1024;
@@ -86,7 +87,7 @@ public class ViewFixIts extends AppCompatActivity {
                     obj.getString("UserName"),
                     obj.getString("Location"),
                     obj.getString("Image"),
-                    obj.getString("Description"),
+                    obj.getString("Category"),
                     curFixed
             ));
         }
@@ -107,7 +108,6 @@ public class ViewFixIts extends AppCompatActivity {
 
     public void updateFixIt(View view){
         String location = editTextLocation.getText().toString();
-        Log.v("locationfun", location);
         String description = editTextDescription.getText().toString();
         String checked;
         if(checkBoxFixed.isChecked()){
@@ -118,10 +118,15 @@ public class ViewFixIts extends AppCompatActivity {
         }
         HashMap<String, String> params = new HashMap<>();
         params.put("Location", location);
-        params.put("Description", description);
-        params.put("Things_Id", id);
+        params.put("Category", description);
         params.put("Fixed", checked);
-        Log.v("things_id", id);
+        params.put("Things_Id", id);
+        for (Map.Entry<String,String> entry : params.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            Log.v("TESTINGMAP", key + " key " + value + " value " );
+            // do stuff
+        }
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_FIXIT, params, CODE_POST_REQUEST);
         request.execute();
         editTextDescription.setText("");
