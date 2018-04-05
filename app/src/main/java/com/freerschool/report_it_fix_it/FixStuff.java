@@ -3,15 +3,12 @@ package com.freerschool.report_it_fix_it;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.MediaStore;
@@ -19,17 +16,13 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,44 +31,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.security.Security;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FixStuff extends AppCompatActivity {
     private static final int CODE_GET_REQUEST = 1024;
@@ -123,11 +90,6 @@ public class FixStuff extends AppCompatActivity {
      */
     private ProgressBar mProgressBar;
 
-    /**
-     * Kicks off the request to fetch an address when pressed.
-     */
-    private Button mFetchAddressButton;
-
 
 
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String>{
@@ -156,6 +118,7 @@ public class FixStuff extends AppCompatActivity {
                 }
             }
             catch (JSONException e){
+                Log.e("errors", e.getMessage().toString());
                 e.printStackTrace();
             }
         }
@@ -188,7 +151,7 @@ public class FixStuff extends AppCompatActivity {
     Bitmap bitmap;
     Button selectImageGallery;
     String encodedImage = "";
-    Spinner dropdown, spinBuildings;
+    Spinner spinnerWrong, spinnerBuilding;
     ProgressDialog progressDialog ; //might be useful
     ImageView preview;
         @Override
@@ -211,10 +174,9 @@ public class FixStuff extends AppCompatActivity {
 
                 }
             });
-        thingsToFixList = new ArrayList<>();
+            thingsToFixList = new ArrayList<>();
             //get the spinner from the xml.
-            dropdown = (Spinner)findViewById(R.id.spinner1);
-            spinBuildings = findViewById(R.id.spinner2);
+            spinnerWrong = (Spinner)findViewById(R.id.spinnerWrong);
             //buildings 1 - 8
             ArrayList<String> buildings = new ArrayList<>();
             for(int i = 1; i <= 8; i++){
@@ -241,13 +203,13 @@ public class FixStuff extends AppCompatActivity {
             ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
                     items2);
             //set the spinners adapter to the previously created one.
-            dropdown.setAdapter(adapter);
-            spinBuildings.setAdapter(adapter1);
+            spinnerWrong.setAdapter(adapter);
+            spinnerBuilding = findViewById(R.id.spinnerBuilding);
+            spinnerBuilding.setAdapter(adapter1);
             mResultReceiver = new AddressResultReceiver(new Handler());
-
+            Description = findViewById(R.id.editTextProblem);
             mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
             mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-            mFetchAddressButton = (Button) findViewById(R.id.fetch_address_button);
             preview = (ImageView) findViewById(R.id.imageView2);
 
             camera = findViewById(R.id.imageButtonCamera);
@@ -293,7 +255,7 @@ public class FixStuff extends AppCompatActivity {
         String location;
         int fix = 0; //not fixed when reported
         String description;
-        description = dropdown.getSelectedItem().toString().trim();
+        description = spinnerWrong.getSelectedItem().toString().trim();
         location = mLocationAddressTextView.getText().toString().trim();
 
         if(TextUtils.isEmpty(description)){
@@ -306,17 +268,19 @@ public class FixStuff extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<>();
         Intent intent = getIntent();
         params.put("UserName", intent.getStringExtra("UserName"));
+        Log.v("username", intent.getStringExtra("UserName"));
         params.put("Location", location);
         params.put("Image", encodedImage);
         params.put("ImagePath", "location");
         params.put("Description", description);
         params.put("Fixed", Integer.toString(fix));
-        params.put("Category", dropdown.getSelectedItem().toString());
-        params.put("Building", spinBuildings.getSelectedItem().toString());
+        params.put("Category", spinnerWrong.getSelectedItem().toString());
+        params.put("Building", spinnerBuilding.getSelectedItem().toString());
         params.put("Room", editTextRoom.getText().toString());
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_FIXIT, params, CODE_POST_REQUEST);
         request.execute();
         editTextRoom.setText("");
+        Description.setText("");
     }
 
     private void readFixIt(){
@@ -442,10 +406,8 @@ public class FixStuff extends AppCompatActivity {
     private void updateUIWidgets() {
         if (mAddressRequested) {
             mProgressBar.setVisibility(ProgressBar.VISIBLE);
-            mFetchAddressButton.setEnabled(false);
         } else {
             mProgressBar.setVisibility(ProgressBar.GONE);
-            mFetchAddressButton.setEnabled(true);
         }
     }
 

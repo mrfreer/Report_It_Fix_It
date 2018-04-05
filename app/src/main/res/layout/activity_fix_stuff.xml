@@ -11,105 +11,94 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:onClick="fixIt"
         android:text="Fix It!"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonCamera"
         android:layout_width="81dp"
         android:layout_height="66dp"
-        android:layout_marginBottom="121dp"
-        android:layout_marginTop="121dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="TakePictureOnClick"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline11"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <ImageView
         android:id="@+id/imageViewFixIt"
-        android:layout_width="119dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="31dp"
-        android:layout_marginTop="31dp"
-        app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline11"
+        android:layout_width="108dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.376"
+        app:layout_constraintStart_toEndOf="@+id/progress_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571"
         app:srcCompat="@android:color/holo_blue_dark" />
 
     <Button
         android:id="@+id/buttonSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:text="Select From Gallery"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonCamera" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/location_address_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="116dp"
+        android:layout_height="87dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toEndOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/fetch_address_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:onClick="fetchAddressButtonHandler"
-        android:text="Get Location"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="330dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="107dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/location_address_view"
-        app:layout_constraintGuide_begin="16dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="249dp"
-        android:layout_height="0dp"
-        android:layout_marginRight="16dp"
+        android:id="@+id/spinnerWrong"
+        android:layout_width="205dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
 
     <android.support.constraint.Guideline
@@ -117,79 +106,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="120dp" />
+        app:layout_constraintGuide_begin="103dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewWrong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:padding="5dp"
         android:paddingTop="5dp"
         android:text="What's wrong?"
+        android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerWrong"
+        app:layout_constraintHorizontal_bias="0.657"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/guideline4" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="56dp"
         android:paddingTop="5dp"
-        android:text="Closest building?"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/closest_building"
+        android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="118dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/spinner2"
-        app:layout_constraintGuide_begin="413dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_begin="413dp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
-        android:text="Description of problem:"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline7" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="159dp"
-        android:orientation="horizontal"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/description_of_problem"
+        android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
         app:layout_constraintEnd_toStartOf="@+id/editTextProblem"
-        app:layout_constraintGuide_begin="442dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWrong" />
 
     <EditText
         android:id="@+id/editTextProblem"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_width="204dp"
+        android:layout_height="74dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/write_as_much_as_possible"
         android:inputType="textMultiLine"
         android:paddingRight="20dp"
         android:paddingTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/guideline7" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerWrong" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline11"
@@ -202,31 +182,58 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="Exact Room (if possible):"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProblem" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/exact_room_if_possible"
+        android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
+        app:layout_constraintEnd_toStartOf="@+id/editTextRoom"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/editTextRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
+        android:layout_width="186dp"
+        android:layout_height="45dp"
         android:ems="10"
-        android:hint="Room:"
+        android:hint="@string/room"
         android:inputType="textPersonName"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProblem" />
+        app:layout_constraintTop_toBottomOf="@+id/guidelineRoom" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="76dp"
         android:layout_height="69dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.836"
-        app:layout_constraintStart_toEndOf="@+id/guideline3"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:srcCompat="@color/colorAccent" />
+
+    <Spinner
+        android:id="@+id/spinnerBuilding"
+        android:layout_width="183dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextRoom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProblem"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="505dp" />
+
 </android.support.constraint.ConstraintLayout>

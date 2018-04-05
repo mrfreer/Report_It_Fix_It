@@ -31,7 +31,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/signIn"
         android:layout_width="379dp"
-        android:layout_height="119dp"
+        android:layout_height="74dp"
         android:layout_weight="1"
         android:padding="2dp"
         app:layout_constraintEnd_toEndOf="parent"

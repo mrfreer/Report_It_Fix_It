@@ -12,7 +12,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.freerschool.report_it_fix_it"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,7 @@ android {
             signingConfig signingConfigs.config
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
