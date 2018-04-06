@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -40,6 +41,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -237,7 +239,7 @@ public class FixStuff extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode !=0){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            bitmap = (Bitmap) data.getExtras().get("data");
             image = bitmap;
             camera.setImageBitmap(bitmap);
         }
@@ -246,6 +248,12 @@ public class FixStuff extends AppCompatActivity {
 
     public void fixIt(View view){
         createFixIt();
+    }
+
+    public byte[] getBytesFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        return stream.toByteArray();
     }
 
 
@@ -262,6 +270,10 @@ public class FixStuff extends AppCompatActivity {
             return;
         }
 
+        if(bitmap != null){
+            encodedImage = Base64.encodeToString(getBytesFromBitmap(bitmap), 0);
+        }
+
 
         HashMap<String, String> params = new HashMap<>();
         Intent intent = getIntent();
@@ -275,12 +287,6 @@ public class FixStuff extends AppCompatActivity {
         params.put("Category", spinnerWrong.getSelectedItem().toString());
         params.put("Building", spinnerBuilding.getSelectedItem().toString());
         params.put("Room", editTextRoom.getText().toString());
-        for (Map.Entry<String,String> entry : params.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            Log.v("TESTINGMAP", key + " key " + value + " value " );
-            // do stuff
-        }
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_FIXIT, params, CODE_POST_REQUEST);
         request.execute();
         editTextRoom.setText("");

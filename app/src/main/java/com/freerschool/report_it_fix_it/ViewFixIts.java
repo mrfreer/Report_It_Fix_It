@@ -212,7 +212,7 @@ public class ViewFixIts extends AppCompatActivity {
             Bitmap bm = StringToBitMap(thingsToFixList.get(position).getImage());
             curImage.setImageBitmap(bm);
             final ThingsToFix thingsToFix = thingsToFixList.get(position);
-            textViewName.setText(thingsToFix.getDescription());
+            textViewName.setText(thingsToFix.getCategory());
             textViewUpdate.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
@@ -221,7 +221,7 @@ public class ViewFixIts extends AppCompatActivity {
                     editTextDescription.setEnabled(true);
                     id = Integer.toString(thingsToFix.getThings_id());
                     editTextLocation.setText(String.valueOf(thingsToFix.getLocation()));
-                    editTextDescription.setText(thingsToFix.getDescription());
+                    editTextDescription.setText(thingsToFix.getCategory());
                     checkBoxFixed.setChecked(thingsToFix.isFixed());
                     button.setText("Update");
                 }
