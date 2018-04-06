@@ -90,7 +90,7 @@ features available.]]>
     <string name="write_as_much_as_possible">Write as much as possible</string>
     <string name="exact_room_if_possible">Exact Room</string>
     <string name="room">Room if applicable</string>
-    <string name="what_s_wrong">Problem</string>
+    <string name="what_s_wrong">Category</string>
     <string name="select_from_gallery">Select From Gallery</string>
 </resources>
 

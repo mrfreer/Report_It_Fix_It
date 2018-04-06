@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
@@ -144,7 +145,6 @@ public class FixStuff extends AppCompatActivity {
     private static final int MY_PERMISSIONS_CAMERA = 0;
     //Attributes
     ImageButton camera;
-    ImageView imageViewFixIt;
     EditText Description, editTextRoom;
     List<ThingsToFix> thingsToFixList;
     static final int CAMERA_PIC_REQUEST = 1;
@@ -156,15 +156,12 @@ public class FixStuff extends AppCompatActivity {
     String encodedImage = "";
     Spinner spinnerWrong, spinnerBuilding;
     ProgressDialog progressDialog ; //might be useful
-        @Override
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_stuff);
         selectImageGallery = findViewById(R.id.buttonSelect);
-
-            imageViewFixIt = findViewById(R.id.imageViewFixIt);
             editTextRoom = findViewById(R.id.editTextRoom);
             selectImageGallery.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -218,9 +215,7 @@ public class FixStuff extends AppCompatActivity {
             mAddressRequested = false;
             mAddressOutput = "";
             updateValuesFromBundle(savedInstanceState);
-
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
             updateUIWidgets();
             fetchAddressButtonHandler();
     }
@@ -229,7 +224,7 @@ public class FixStuff extends AppCompatActivity {
     String mCurrentPhotoPath;
 
     public void TakePictureOnClick(View view){
-        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),0);
+        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE),2);
 
     }
 
@@ -237,11 +232,32 @@ public class FixStuff extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //needed to get code from the gallery
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode !=0){
-            bitmap = (Bitmap) data.getExtras().get("data");
-            image = bitmap;
-            camera.setImageBitmap(bitmap);
+        switch(requestCode) {
+            case 0:
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = data.getData();
+                    camera.setImageURI(selectedImage);
+                    bitmap = ((BitmapDrawable)camera.getDrawable()).getBitmap();
+                }
+
+                break;
+            case 1:
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = data.getData();
+                    camera.setImageURI(selectedImage);
+                    bitmap = ((BitmapDrawable)camera.getDrawable()).getBitmap();
+                }
+                break;
+
+            case 2:
+                if(resultCode !=0){
+                    bitmap = (Bitmap) data.getExtras().get("data");
+                    image = bitmap;
+                    camera.setImageBitmap(bitmap);
+                }
+                break;
         }
     }
 
@@ -291,6 +307,8 @@ public class FixStuff extends AppCompatActivity {
         request.execute();
         editTextRoom.setText("");
         Description.setText("");
+        camera.setImageResource(R.drawable.hammer);
+
     }
 
     private void readFixIt(){

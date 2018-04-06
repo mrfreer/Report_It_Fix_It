@@ -7,6 +7,22 @@
     tools:context="com.freerschool.report_it_fix_it.FixStuff"
     tools:layout_editor_absoluteY="25dp">
 
+    <TextView
+        android:id="@+id/textViewImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:text="Take a picture"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonCamera"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -22,33 +38,17 @@
 
     <ImageButton
         android:id="@+id/imageButtonCamera"
-        android:layout_width="81dp"
-        android:layout_height="66dp"
+        android:layout_width="169dp"
+        android:layout_height="161dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="TakePictureOnClick"
+        android:paddingTop="5dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonSelect"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFixIt"
         app:srcCompat="@android:drawable/ic_menu_camera" />
-
-    <ImageView
-        android:id="@+id/imageViewFixIt"
-        android:layout_width="122dp"
-        android:layout_height="76dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:paddingTop="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonCamera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.376"
-        app:layout_constraintStart_toEndOf="@+id/progress_bar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/holo_blue_dark" />
 
     <Button
         android:id="@+id/buttonSelect"
@@ -56,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
         android:text="@string/select_from_gallery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,20 +73,20 @@
 
     <TextView
         android:id="@+id/location_address_view"
-        android:layout_width="116dp"
-        android:layout_height="87dp"
+        android:layout_width="78dp"
+        android:layout_height="112dp"
         android:layout_marginEnd="8dp"
-        android:paddingTop="5dp"
+        android:paddingTop="15dp"
         android:text="Location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerWrong"
-        android:layout_width="205dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="225dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSelect" />
 
@@ -93,7 +94,7 @@
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         android:padding="5dp"
         android:paddingTop="5dp"
         android:text="@string/description_of_problem"
@@ -105,7 +106,7 @@
         android:id="@+id/textViewProblem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:padding="5dp"
         android:paddingTop="5dp"
         android:text="@string/what_s_wrong"
@@ -117,47 +118,47 @@
         android:id="@+id/textViewBuilding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
         android:paddingTop="5dp"
         android:text="@string/closest_building"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintRight_toLeftOf="@+id/guidelineLabels"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
 
     <EditText
         android:id="@+id/editTextProblem"
-        android:layout_width="203dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="226dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
+        android:hint="Be as descriptive as possible"
         android:inputType="textMultiLine"
-        android:paddingRight="20dp"
-        android:paddingTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerWrong" />
 
     <TextView
         android:id="@+id/textViewRoom"
-        android:layout_width="119dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="40dp"
-        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
         android:text="@string/exact_room_if_possible"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineRoom"
         app:layout_constraintRight_toLeftOf="@+id/guidelineLabels"
         app:layout_constraintTop_toBottomOf="@+id/textViewBuilding"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextRoom"
-        android:layout_width="201dp"
+        android:layout_width="229dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/room"
         android:inputType="textPersonName"
@@ -167,30 +168,31 @@
 
     <Spinner
         android:id="@+id/spinnerBuilding"
-        android:layout_width="203dp"
-        android:layout_height="40dp"
+        android:layout_width="223dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextRoom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.785"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toEndOf="@+id/textViewBuilding"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProblem" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextProblem"
+        app:layout_constraintVertical_bias="0.152" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guidelineRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="505dp" />
+        app:layout_constraintGuide_begin="553dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guidelineLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.34" />
+        app:layout_constraintGuide_percent="0.28" />
 
 </android.support.constraint.ConstraintLayout>
