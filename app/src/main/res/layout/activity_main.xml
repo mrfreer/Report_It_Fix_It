@@ -8,6 +8,18 @@
     tools:context="com.freerschool.report_it_fix_it.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
+    <Button
+        android:id="@+id/sign_out_and_disconnect"
+        android:layout_width="137dp"
+        android:layout_height="47dp"
+        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:background="@android:color/background_light"
+        android:onClick="beginSignOut"
+        android:text="Sign Out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="130dp"
@@ -52,20 +64,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline6">
 
-        <Button
-            android:id="@+id/sign_out_and_disconnect"
-            android:layout_width="103dp"
-            android:layout_height="29dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:onClick="beginSignOut"
-            android:text="Sign Out"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.Toolbar
@@ -75,7 +73,14 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MDC Kendall Fix It App"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
+    </android.support.v7.widget.Toolbar>
 
 
     <ImageView

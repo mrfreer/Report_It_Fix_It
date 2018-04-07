@@ -193,6 +193,8 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("");
         sign_in_button = (com.google.android.gms.common.SignInButton)findViewById(R.id.sign_in_button);
         sign_out_and_disconnect = (Button)findViewById(R.id.sign_out_and_disconnect);
         setSupportActionBar(myToolbar);
